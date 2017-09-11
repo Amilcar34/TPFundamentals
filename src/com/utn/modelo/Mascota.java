@@ -7,13 +7,16 @@ public abstract class Mascota {
 	private String raza;
 	private int edad;
 	private String causaDeAtencion;
+	private int turno;
 	
 	private String resultado;
 	private String causas;
 	private String medicamentos;
+	private String doctor;
 	
-	public Mascota (String nombre, String tipo, String raza, int edad, String causaDeAtencion) {
-
+	public Mascota (int turno, String nombre, String tipo, String raza, int edad, String causaDeAtencion) {
+		
+		this.turno = turno;
 		this.nombre = nombre;
 		this.tipo = tipo;
 		this.raza = raza;
@@ -98,6 +101,16 @@ public abstract class Mascota {
 
 	public void setCausaDeAtencion(String causaDeAtencion) {
 		this.causaDeAtencion = causaDeAtencion;
+	}
+
+
+	public String getDoctor() {
+		return doctor;
+	}
+
+
+	public void setDoctor(String doctor) {
+		this.doctor = doctor;
 	}
 
 	

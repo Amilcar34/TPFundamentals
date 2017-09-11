@@ -26,9 +26,11 @@ public final class Doctor {
 	}
 	
 	public void setMascota(Mascota mascota) {
-		System.out.println("El Dr/a: " + nombre + " esta atendidendo a un " + mascota.getTipo() + " de nombre " + mascota.getNombre() + ". Problema: " + mascota.getCausaDeAtencion());
+		System.out.println("Al Dr/a: " + nombre + " se le asigno un " + mascota.getTipo() + " de nombre " + mascota.getNombre() + ". Problema: " + mascota.getCausaDeAtencion());
 		this.mascotas.add(mascota);
 		
+		mascota.setDoctor(this.nombre);
+		Reporte.cargaDoctorMascorta(mascota);
 	}
 	
 	public String getNombre() {

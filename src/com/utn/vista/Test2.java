@@ -8,39 +8,85 @@ public final class Test2 {
 
 	public static void main(String[] args) {
 
-		System.out.print("Estan trabajando los Dres/as: " );
+		System.out.print("Estan trabajando los Dres/as: ");
 		VeterinariaControlador.creoDoctores("Juan", "Felipe", "Nacho", "Luis", "Sofia");
 		System.out.println();
 		System.out.println();
 		
-		Scanner entrada = new Scanner(System.in);
-
-		System.out.println("Introduzca el nombre del animal");
-		String nombreAnimal = entrada.nextLine();
-		
-		System.out.println("Intrudocue la opcion numerica al animal que se va a tender");
-		System.out.println("1- Perro");
-		System.out.println("2- Gato");
-		System.out.println("3- Conejo");
-		int tipoAnimal = entrada.nextInt();
-		
-		Scanner entrada1 = new Scanner(System.in);
-		
-		System.out.println("Introduzca la raza del animal");
-		String razaAnimal = entrada1.nextLine();
-		
-		System.out.println("Introduzca la edad del animal");
-		int edadAnimal = entrada1.nextInt();
-		
-		Scanner entrada2 = new Scanner(System.in);
-		System.out.println("¿Que sintoma tiene?");
-		String causaAnimal = entrada2.nextLine();
-		
-		//System.out.println(nombreAnimal + " "+ tipoAnimal + " "+ razaAnimal + " "+ edadAnimal + " "+ causaAnimal);
-		
-		VeterinariaControlador.llegadaAnimal(nombreAnimal, tipoAnimal, razaAnimal, edadAnimal, causaAnimal);
-		
+		inicio();
 		
 	}
 
+	// llega el animal a la Veterinaria
+	private static void llegadaDeAnimal() {
+		int continuar = 1;
+		while (continuar == 1) {
+
+			try {
+				Scanner entrada = new Scanner(System.in);
+
+				System.out.println("Introduzca el nombre del animal");
+				String nombreAnimal = entrada.nextLine();
+
+				System.out.println("Intrudocue la opcion NUMERICA del animal que se va a atender");
+				System.out.println("1- Perro");
+				System.out.println("2- Gato");
+				System.out.println("3- Conejo");
+				int tipoAnimal = entrada.nextInt();
+
+				Scanner entrada1 = new Scanner(System.in);
+
+				System.out.println("Introduzca la raza del animal");
+				String razaAnimal = entrada1.nextLine();
+
+				System.out.println("Introduzca la edad del animal");
+				int edadAnimal = entrada1.nextInt();
+
+				Scanner entrada2 = new Scanner(System.in);
+				System.out.println("¿Que sintoma tiene?");
+				String causaAnimal = entrada2.nextLine();
+
+				System.out.println(
+						nombreAnimal + " " + tipoAnimal + " " + razaAnimal + " " + edadAnimal + " " + causaAnimal);
+
+				VeterinariaControlador.llegadaAnimal(nombreAnimal, tipoAnimal, razaAnimal, edadAnimal, causaAnimal);
+
+				System.out.println();
+				System.out.println("¿Que desea seguir haciendo?");
+				System.out.println("1- Cargar otra Mascota");
+				System.out.println("2- Se reviso un animal y se desea cargar observaciones");
+				
+				continuar = entrada2.nextInt();
+
+			} catch (Exception e) {
+				System.err.println("-------EL DATO INGRESADO ES INCORRECTO-------");
+				System.err.println("-----RESPETE LOS VALORES QUE SE LE PIDE------");
+				System.out.println(e.getMessage());
+			}
+		}
+	animalVisto();
+	}
+
+	private static void inicio(){
+		Scanner opciones = new Scanner(System.in);
+		System.out.println("¿Asistente o Doctor/a?");
+		System.out.println("1- Doctor/a");
+		System.out.println("2- Asistente");
+		int opcion = opciones.nextInt();
+
+		if (opcion == 1)
+			animalVisto();
+		else
+			llegadaDeAnimal();
+	}
+	
+	private static void animalVisto() {
+		System.out.println("Ingrese ");
+	}
+	
+	private static void reporte(){
+		System.out.println();
+		VeterinariaControlador.reporteFinal();
+	}
+	
 }

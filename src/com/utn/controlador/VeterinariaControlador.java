@@ -25,22 +25,20 @@ public final class VeterinariaControlador {
 		 d5 = new Doctor(nombreD5);		
 	}
 
-	public static void llegadaAnimal(String nombre, int tipo, String razaAnimal, int edad, String causaDeAtencion){
+	public static void llegadaAnimal(int turno, String nombre, int tipo, String razaAnimal, int edad, String causaDeAtencion){
 		
 		cantidadDeAnimales ++;
 
-		Reporte.setCantidadAnimales(cantidadDeAnimales);
-		
 		Mascota m = null;
 		
 		if (tipo == 1 ){
-			m = new Perro(nombre, "Perro", razaAnimal, edad, causaDeAtencion);
+			m = new Perro(turno, nombre, "Perro", razaAnimal, edad, causaDeAtencion);
 		
 		}else if(tipo == 2){
-			m = new Gato (nombre, "Gato", razaAnimal, edad, causaDeAtencion);
+			m = new Gato (turno, nombre, "Gato", razaAnimal, edad, causaDeAtencion);
 		
 		}else if (tipo == 3 ){
-			m = new Conejo (nombre, "Conejo", razaAnimal, edad, causaDeAtencion);
+			m = new Conejo (turno, nombre, "Conejo", razaAnimal, edad, causaDeAtencion);
 		}		
 
 		VeterinariaControlador.compruebaCupo(m);	
@@ -50,7 +48,9 @@ public final class VeterinariaControlador {
 	public static void compruebaCupo(Mascota m) {
 				
 		if(cantidadDeAnimales <= limiteDeAnimalesPorDia){
+
 			VeterinariaControlador.asignaDoctor(m);
+			Reporte.setCantidadAnimales(cantidadDeAnimales);
 			
 		}else{
 			System.err.println("Se exedio el limite por el dia de hoy");
@@ -92,7 +92,9 @@ public final class VeterinariaControlador {
 }
 	
 	public static void reporteFinal() {
-		Reporte.reporteTotal();
+		Reporte.cantidadDeAnimalesAtendidos();
+		System.out.println();
+		Reporte.tabla();
 		
 	}
 	
