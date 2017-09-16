@@ -1,6 +1,6 @@
 package com.utn.modelo;
 
-public abstract class Mascota {
+public class Mascota {
 
 	private String nombre;
 	private String tipo;
@@ -14,7 +14,10 @@ public abstract class Mascota {
 	private String medicamentos;
 	private String doctor;
 	
-	public Mascota (int turno, String nombre, String tipo, String raza, int edad, String causaDeAtencion) {
+	public Mascota(){}
+	
+	public Mascota (int turno, String nombre, String tipo, String raza, 
+			int edad, String causaDeAtencion) {
 		
 		this.turno = turno;
 		this.nombre = nombre;
@@ -25,6 +28,14 @@ public abstract class Mascota {
 		
 	}
 
+
+	public int getTurno() {
+		return turno;
+	}
+
+	public void setTurno(int turno) {
+		this.turno = turno;
+	}
 
 	public String getNombre() {
 		return nombre;

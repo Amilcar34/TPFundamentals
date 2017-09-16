@@ -7,8 +7,6 @@ public final class Reporte {
 	private static int cantidadAnimales;
 	private static ArrayList<Mascota> resumenDelDia = new ArrayList<Mascota>();
 	
-	//public Reporte() {}
-
 	public static void setCantidadAnimales(int cantidadDeAnimales){
 		cantidadAnimales = cantidadDeAnimales;
 	}
@@ -18,16 +16,23 @@ public final class Reporte {
 	
 	}
 
-	public static void cargaDoctorMascorta(Mascota mascota) {
-		resumenDelDia.add(mascota);
+	public static void cargaDoctorMascota(Mascota mascota) {
+		int index = mascota.getTurno();
+		index --;
+		resumenDelDia.add(index, mascota);
+	}
+
+	public static void setResumenDelDia(ArrayList<Mascota> resumenDelDia) {
+		Reporte.resumenDelDia = resumenDelDia;
 	}
 
 	public static ArrayList<Mascota> getResumenDelDia() {
 		return resumenDelDia;
 	}
 
-	public static void setResumenDelDia(ArrayList<Mascota> resumenDelDia) {
-		Reporte.resumenDelDia = resumenDelDia;
+	
+	public static void setResumenDelDia(int index, Mascota m) {
+		Reporte.resumenDelDia.add(index, m);
 	}
 
 	public static int getCantidadAnimales() {

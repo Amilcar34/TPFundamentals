@@ -1,11 +1,12 @@
 package com.utn.controlador;
 
-import java.util.ArrayList;
+import java.util.*;
 
 import com.utn.modelo.*;
 
 public final class VeterinariaControlador {
 	
+	static Mascota m;
 	private static Doctor d1;
 	private static Doctor d2;
 	private static Doctor d3;
@@ -31,14 +32,14 @@ public final class VeterinariaControlador {
 
 		Mascota m = null;
 		
-		if (tipo == 1 ){
-			m = new Perro(turno, nombre, "Perro", razaAnimal, edad, causaDeAtencion);
+		if (tipo == 1){
+			m = new Mascota(turno, nombre, "Perro", razaAnimal, edad, causaDeAtencion);
 		
 		}else if(tipo == 2){
-			m = new Gato (turno, nombre, "Gato", razaAnimal, edad, causaDeAtencion);
+			m = new Mascota(turno, nombre, "Gato", razaAnimal, edad, causaDeAtencion);
 		
 		}else if (tipo == 3 ){
-			m = new Conejo (turno, nombre, "Conejo", razaAnimal, edad, causaDeAtencion);
+			m = new Mascota(turno, nombre, "Conejo", razaAnimal, edad, causaDeAtencion);
 		}		
 
 		VeterinariaControlador.compruebaCupo(m);	
@@ -54,6 +55,7 @@ public final class VeterinariaControlador {
 			
 		}else{
 			System.err.println("Se exedio el limite por el dia de hoy");
+			reporteFinal();
 		}
 	}
 	
@@ -86,16 +88,51 @@ public final class VeterinariaControlador {
 				i = 1;
 				break;
 				
+				
 			default:
-				break;
 			}	
 }
 	
+	public static void BusquedaMascota(int turnoEs) {
+		int index = turnoEs -1;
+		System.out.print("La mascota se llama: ");
+		System.out.println(Reporte.getResumenDelDia().get(index).getNombre());
+		
+		System.out.print("Atendida por razon/es: ");
+		System.out.println(Reporte.getResumenDelDia().get(index).getCausaDeAtencion());
+	
+		m = new Mascota();
+
+		m.setDoctor(Reporte.getResumenDelDia().get(index).getDoctor());
+		m.setEdad(Reporte.getResumenDelDia().get(index).getEdad());
+		m.setNombre(Reporte.getResumenDelDia().get(index).getNombre());
+		m.setRaza(Reporte.getResumenDelDia().get(index).getRaza());
+		m.setCausaDeAtencion(Reporte.getResumenDelDia().get(index).getCausaDeAtencion());
+		m.setTipo(Reporte.getResumenDelDia().get(index).getTipo());
+		
+	}
+	
+	public static void animalDiagnosticado(int turnoEs, String resultadoEs, String causaEs, String medicamentosEs) {
+		int index = turnoEs - 1;
+		
+		m.setCausas(causaEs);
+		m.setMedicamentos(medicamentosEs);
+		m.setResultado(resultadoEs);
+		
+		Reporte.setResumenDelDia(index, m);
+	}
+
 	public static void reporteFinal() {
 		Reporte.cantidadDeAnimalesAtendidos();
 		System.out.println();
 		Reporte.tabla();
-		
 	}
-	
+
 }
+
+
+
+
+
+
+

@@ -6,6 +6,8 @@ import com.utn.controlador.VeterinariaControlador;
 
 public final class Test2 {
 
+	public static int turno = 1;
+
 	public static void main(String[] args) {
 
 		System.out.print("Estan trabajando los Dres/as: ");
@@ -13,11 +15,40 @@ public final class Test2 {
 		System.out.println();
 		System.out.println();
 		
-		inicio();
+		llegadaDeAnimal();
 		
 	}
+	
+	private static void inicio(){
+		
+		Scanner opciones = new Scanner(System.in);
+		System.out.println("¿Que decea hacer?");
+		System.out.println("1- Cargar otra Mascota");
+		System.out.println("2- Se reviso un animal y se desea cargar observaciones");
+		System.out.println("3- ¿Desea ver el reporte final?");
+		int opcion = opciones.nextInt();
+		
+		switch (opcion) {
+		case 1:
+			llegadaDeAnimal();
+			break;
+			
+		case 2:
+			busquedaDeAnimalDiagnosticado();
+			break;
 
-	// llega el animal a la Veterinaria
+		case 3:
+			reporte();
+			break;
+		
+		default:
+			System.err.println("El dato ingresado es incorrecto");
+			System.out.println();
+			inicio();
+			break;
+		}
+	}
+
 	private static void llegadaDeAnimal() {
 		int continuar = 1;
 		while (continuar == 1) {
@@ -46,11 +77,11 @@ public final class Test2 {
 				System.out.println("¿Que sintoma tiene?");
 				String causaAnimal = entrada2.nextLine();
 
-				System.out.println(
-						nombreAnimal + " " + tipoAnimal + " " + razaAnimal + " " + edadAnimal + " " + causaAnimal);
+				System.out.println(turno + " " + nombreAnimal + " " + tipoAnimal + " " + razaAnimal + " " + edadAnimal + " " + causaAnimal);
 
-				VeterinariaControlador.llegadaAnimal(nombreAnimal, tipoAnimal, razaAnimal, edadAnimal, causaAnimal);
-
+				VeterinariaControlador.llegadaAnimal(turno, nombreAnimal, tipoAnimal, razaAnimal, edadAnimal, causaAnimal);
+				turno++;
+				
 				System.out.println();
 				System.out.println("¿Que desea seguir haciendo?");
 				System.out.println("1- Cargar otra Mascota");
@@ -59,29 +90,41 @@ public final class Test2 {
 				continuar = entrada2.nextInt();
 
 			} catch (Exception e) {
+				System.out.println();
 				System.err.println("-------EL DATO INGRESADO ES INCORRECTO-------");
 				System.err.println("-----RESPETE LOS VALORES QUE SE LE PIDE------");
 				System.out.println(e.getMessage());
 			}
 		}
-	animalVisto();
-	}
-
-	private static void inicio(){
-		Scanner opciones = new Scanner(System.in);
-		System.out.println("¿Asistente o Doctor/a?");
-		System.out.println("1- Doctor/a");
-		System.out.println("2- Asistente");
-		int opcion = opciones.nextInt();
-
-		if (opcion == 1)
-			animalVisto();
-		else
-			llegadaDeAnimal();
+		busquedaDeAnimalDiagnosticado();
 	}
 	
-	private static void animalVisto() {
-		System.out.println("Ingrese ");
+	private static void busquedaDeAnimalDiagnosticado() {
+		Scanner turno = new Scanner(System.in);
+		System.out.println("Ingrese Numero de turno");
+		int turnoEs = turno.nextInt();
+		
+		VeterinariaControlador.BusquedaMascota(turnoEs);
+		
+		animalDiagnosticado(turnoEs);
+	}
+	
+	private static void animalDiagnosticado(int turnoEs) {
+		Scanner resultado = new Scanner(System.in);
+		System.out.print("Resultado de la revisación es: ");
+		String resultadoEs = resultado.nextLine();
+		
+		Scanner causa = new Scanner(System.in);
+		System.out.println("¿Cual es su diagnostico?");
+		String causaEs = causa.nextLine();
+		
+		Scanner medicamentos = new Scanner(System.in);
+		System.out.println("Ponga los medicamentos resetados separados por espacio");
+		String medicamentosEs = medicamentos.nextLine();
+		
+		VeterinariaControlador.animalDiagnosticado(turnoEs, resultadoEs, causaEs, medicamentosEs);
+		
+		inicio();
 	}
 	
 	private static void reporte(){
